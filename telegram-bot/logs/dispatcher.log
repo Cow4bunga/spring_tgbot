@@ -1,0 +1,27 @@
+2023-09-13 14:43:59 INFO  TelegramBot:130 - Replied to user Ivan
+2023-10-14 22:10:59 INFO  TelegramBot:130 - Replied to user Ivan
+2023-10-15 12:25:05 INFO  TelegramBot:137 - Replied to user Ivan
+2023-10-15 12:36:11 INFO  TelegramBot:137 - Replied to user Ivan
+2023-10-15 14:41:26 INFO  TelegramBot:166 - Replied to user Ivan
+2023-10-15 14:48:33 INFO  TelegramBot:166 - Replied to user Ivan
+2023-10-15 14:50:24 INFO  TelegramBot:166 - Replied to user Ivan
+2023-10-15 14:59:59 INFO  TelegramBot:166 - Replied to user Ivan
+2023-10-15 15:02:31 INFO  TelegramBot:166 - Replied to user Ivan
+2023-10-15 15:18:59 INFO  TelegramBot:156 - Replied to user Ivan
+2023-10-15 20:30:00 INFO  TelegramBot:156 - Replied to user Ivan
+2023-10-22 17:00:15 INFO  TelegramBot:163 - Replied to user Ivan
+2023-10-22 17:45:22 INFO  TelegramBot:176 - Replied to user Ivan
+2023-10-22 20:51:56 INFO  TelegramBot:182 - Replied to user Ivan
+2023-10-23 22:08:44 INFO  TelegramBot:207 - Replied to user Ivan
+2023-10-23 22:14:25 INFO  TelegramBot:207 - Replied to user Ivan
+2023-10-24 18:39:43 INFO  TelegramBot:210 - Replied to user Ivan
+2023-10-24 22:14:10 INFO  TelegramBot:224 - Replied to user Ivan
+2023-10-24 22:15:57 INFO  TelegramBot:224 - Replied to user Ivan
+2023-10-24 22:31:07 INFO  TelegramBot:238 - Replied to user Ivan
+2023-10-24 23:52:20 INFO  TelegramBot:314 - Replied to user Ivan
+2023-11-03 13:07:51 INFO  TelegramBot:313 - Replied to user Ivan
+2023-11-05 16:53:37 INFO  TelegramBot:313 - Replied to user Ivan
+2023-11-05 17:03:39 INFO  TelegramBot:313 - Replied to user Ivan
+2023-11-05 17:47:12 ERROR TelegramBot:554 - Error while executing message: org.telegram.telegrambots.meta.exceptions.TelegramApiValidationException: Text parameter can't be empty in method: SendMessage(chatId=773130380, messageThreadId=null, text=, parseMode=null, disableWebPagePreview=null, disableNotification=null, replyToMessageId=null, replyMarkup=null, entities=null, allowSendingWithoutReply=null, protectContent=null)
+2023-11-06 14:12:51 INFO  TelegramBot:341 - Replied to user Ivan
+2023-11-06 14:33:48 INFO  TelegramBot:341 - Replied to user Ivan
