@@ -23,37 +23,37 @@ public class NewsServiceImpl implements NewsService {
     public List<String> getEverythingByKeyword(String keyword, NewsModel newsModel) throws IOException, ParseException {
         String dateToday = Utils.getTodayDate();
         String dateYesterday = Utils.getYesterdayDate();
-        URL url = new URL("https://newsapi.org/v2/everything?q=" + keyword + "&from=" + dateYesterday + "&to=" + dateToday + "&sortBy=popularity&apiKey=b315e55bf7e541b3bbe198e527af246c");
+        URL url = new URL("https://newsapi.org/v2/everything?q=" + keyword + "&from=" + dateYesterday + "&to=" + dateToday + "&sortBy=popularity&apiKey=***************************");
         return getNewsData(url, newsModel);
     }
 
     @Override
     public List<String> getHeadlinesByCountry(String country, NewsModel newsModel) throws IOException, ParseException {
-        URL url = new URL("https://newsapi.org/v2/top-headlines?country=" + country + "&apiKey=b315e55bf7e541b3bbe198e527af246c");
+        URL url = new URL("https://newsapi.org/v2/top-headlines?country=" + country + "&apiKey=***************************");
         return getNewsData(url, newsModel);
     }
 
     @Override
     public List<String> getHeadlinesByCategory(String category, NewsModel newsModel) throws IOException, ParseException {
-        URL url = new URL("https://newsapi.org/v2/top-headlines?category=" + category + "&apiKey=b315e55bf7e541b3bbe198e527af246c");
+        URL url = new URL("https://newsapi.org/v2/top-headlines?category=" + category + "&apiKey=***************************");
         return getNewsData(url, newsModel);
     }
 
     @Override
     public List<String> getHeadlinesBySource(String source, NewsModel newsModel) throws IOException, ParseException {
-        URL url = new URL("https://newsapi.org/v2/top-headlines?sources=" + source + "&apiKey=b315e55bf7e541b3bbe198e527af246c");
+        URL url = new URL("https://newsapi.org/v2/top-headlines?sources=" + source + "&apiKey=***************************");
         return getNewsData(url, newsModel);
     }
 
     @Override
     public List<String> getSourcesByCountry(String country, SourceModel sourceModel) throws IOException, ParseException {
-        URL url = new URL("https://newsapi.org/v2/top-headlines/sources?country=" + country + "&sortBy=popularity&apiKey=b315e55bf7e541b3bbe198e527af246c");
+        URL url = new URL("https://newsapi.org/v2/top-headlines/sources?country=" + country + "&sortBy=popularity&apiKey=***************************");
         return getSourcesData(url, sourceModel);
     }
 
     @Override
     public List<String> getSourcesByCategory(String category, SourceModel sourceModel) throws IOException, ParseException {
-        URL url = new URL("https://newsapi.org/v2/top-headlines/sources?category=" + category + "&sortBy=popularity&apiKey=b315e55bf7e541b3bbe198e527af246c");
+        URL url = new URL("https://newsapi.org/v2/top-headlines/sources?category=" + category + "&sortBy=popularity&apiKey=***************************");
         return getSourcesData(url, sourceModel);
     }
 
