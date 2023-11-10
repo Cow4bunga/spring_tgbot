@@ -52,12 +52,7 @@ public class TelegramBot extends TelegramLongPollingBot {
     static Set<String> currencySet = new HashSet<>();
 
     private int flag = 0;
-    static final String HELP_MESSAGE = "You can execute commands from the main menu on the left or by typing a command:\n\n" +
-            "Type /start to see a welcome message\n\n" +
-//            "Type /stats to see statistics for your data\n\n" +
-            "Type /data to see the contents of your notes\n\n" +
-            "Type /delete to remove note/-s from your data\n\n" +
-            "Type /help to see this message again";
+
 
     static {
         botCommandList.add(new BotCommand("/start", "get a welcome message"));
@@ -218,6 +213,12 @@ public class TelegramBot extends TelegramLongPollingBot {
                 prepareAndSendMessage(chatId, "Successfully created note!");
                 flag = 0;
             } else if (flag == 42) {
+                NoteDto noteDto = new NoteDto();
+                long noteId=Long.valueOf(message.substring(0,message.indexOf("\n")));
+                noteDto.setTitle(noteService.getNoteById(chatId,noteId).getTitle());
+                noteDto.setNote(message.substring(message.indexOf("\n") + 1));
+                noteService.updateNote(noteId,chatId,noteDto);
+                prepareAndSendMessage(chatId, "Successfully edited note!");
                 flag = 0;
             } else if (flag == 43) {
                 noteService.deleteNote(chatId, Long.valueOf(message));
@@ -232,7 +233,7 @@ public class TelegramBot extends TelegramLongPollingBot {
                         break;
                     }
                     case "/help" -> {
-                        prepareAndSendMessage(chatId, HELP_MESSAGE);
+                        prepareAndSendMessage(chatId, Constants.HELP_MESSAGE);
                         break;
                     }
                     case "/data" -> {
@@ -250,19 +251,9 @@ public class TelegramBot extends TelegramLongPollingBot {
                         getNews(chatId);
                         flag = 3;
                     }
-                    case "add note" -> {
-                        flag=0;
-                        prepareAndSendMessage(chatId, "Please, enter note in the following format:\n" +
-                                "First line-title of the note\n" +
-                                "Next lines-note's content");
-                        flag = 41;
-                    }
-                    case "edit note" -> {
-                        flag = 42;
-                    }
-                    case "delete note" -> {
-                        prepareAndSendMessage(chatId, "Please, enter the ID of the note to be deleted:");
-                        flag = 43;
+                    case "notes"->{
+                        manageNotes(chatId);
+                        flag=4;
                     }
                     default -> {
                         prepareAndSendMessage(chatId, "Sorry, command is not supported!");
@@ -327,6 +318,23 @@ public class TelegramBot extends TelegramLongPollingBot {
                 response = "Please, enter a category to search corresponding sources";
                 flag = 36;
                 executeEditMessageText(response, chatId, messageId);
+            } else if (callbackData.equals(Constants.ADD)) {
+                response="Please, enter note in the following format:\n" +
+                        "First line-title of the note\n" +
+                        "Next lines-note's content";
+                flag=41;
+                executeEditMessageText(response,chatId,messageId);
+            }else if(callbackData.equals(Constants.EDIT)){
+                response="Please, enter the ID of the note you want to edit on the separate line, " +
+                        "then new contents in the following format:\n" +
+                        "First line-title of the note\n" +
+                        "Next lines-note's content";
+                flag=42;
+                executeEditMessageText(response,chatId,messageId);
+            }else if(callbackData.equals(Constants.DELETE)){
+                response="Please, enter the ID of the note you want to delete";
+                flag=43;
+                executeEditMessageText(response,chatId,messageId);
             }
         }
     }
@@ -380,9 +388,7 @@ public class TelegramBot extends TelegramLongPollingBot {
 
         row = new KeyboardRow();
 
-        row.add("add note");
-        row.add("edit note");
-        row.add("delete note");
+        row.add("notes");
         keyboardRows.add(row);
 
         keyboardMarkup.setKeyboard(keyboardRows);
@@ -400,8 +406,35 @@ public class TelegramBot extends TelegramLongPollingBot {
         return String.valueOf(sb);
     }
 
-    private void addNote() {
+    private void manageNotes(long chatId){
+        SendMessage message = new SendMessage();
+        message.setChatId(String.valueOf(chatId));
+        message.setText("Please, choose the operation you want to perform:");
 
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> rowsInLine = new ArrayList<>();
+        List<InlineKeyboardButton> rowInLine = new ArrayList<>();
+        InlineKeyboardButton addButton = new InlineKeyboardButton();
+        InlineKeyboardButton editButton = new InlineKeyboardButton();
+        InlineKeyboardButton deleteButton = new InlineKeyboardButton();
+
+        addButton.setText("add note");
+        editButton.setText("edit note");
+        deleteButton.setText("delete note");
+
+        addButton.setCallbackData(Constants.ADD);
+        editButton.setCallbackData(Constants.EDIT);
+        deleteButton.setCallbackData(Constants.DELETE);
+
+        rowInLine.add(addButton);
+        rowInLine.add(editButton);
+        rowInLine.add(deleteButton);
+        rowsInLine.add(rowInLine);
+
+        inlineKeyboardMarkup.setKeyboard(rowsInLine);
+        message.setReplyMarkup(inlineKeyboardMarkup);
+
+        executeMessage(message);
     }
 
     // TODO: Create better query processing
