@@ -16,13 +16,13 @@ import java.text.ParseException;
 public class WeatherServiceImpl implements WeatherService {
     @Override
     public String getRealTimeForecast(String message, WeatherReport report) throws IOException, ParseException {
-        URL url = new URL("http://api.weatherapi.com/v1/current.json?key=64499f12c98a4b1da7a130948232210&q=" + message);
+        URL url = new URL("http://api.weatherapi.com/v1/current.json?key=*******************************&q=" + message);
         return getWeatherReportData(url, report);
     }
 
     @Override
     public String getForecast(String message, ForecastModel report) throws IOException, ParseException {
-        URL url = new URL("http://api.weatherapi.com/v1/forecast.json?key=64499f12c98a4b1da7a130948232210&q=" + message);
+        URL url = new URL("http://api.weatherapi.com/v1/forecast.json?key=*******************************&q=" + message);
         return getForecastData(url, report);
     }
 
